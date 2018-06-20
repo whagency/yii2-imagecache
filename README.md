@@ -42,7 +42,6 @@ or add to your composer.json file
 
 ```
 
-
 Config
 ------
 
