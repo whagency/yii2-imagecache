@@ -4,6 +4,8 @@
     </a>
 </p>
 
+# yii2-imagecache
+
 Yii2 extension for generating images based on Imagick
 
 [![Latest Stable Version](https://poser.pugx.org/whagency/yii2-imagecache/v/stable)](https://packagist.org/packages/whagency/yii2-imagecache)
