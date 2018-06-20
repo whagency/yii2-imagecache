@@ -48,7 +48,7 @@ Config
 'components' => [
     ...
     'imageCache' => [
-        'class' => 'letyii\imagecache\imageCache',
+        'class' => 'webheads\imagecache\imageCache',
         'cachePath' => '@app/web/files/cache',
         'cacheUrl' => '@web/files/cache',
     ],
