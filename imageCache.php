@@ -57,8 +57,11 @@ class imageCache extends \yii\base\Component
         if (isset($imagick_options['fit']) && !empty($imagick_options['fit'])) {
             $file['basename'] = 'fit'.$imagick_options['fit'].'_'.$file['basename'];
         }
-        if (isset($imagick_options['watermark']) && file_exists($imagick_options['watermark'])) {
-            $file['basename'] = 'wm_'.$file['basename'];
+        if (isset($imagick_options['watermark'])) {
+            $imagick_options['watermark'] = Yii::getAlias($imagick_options['watermark']);
+            if (file_exists($imagick_options['watermark'])) {
+                $file['basename'] = 'wm_'.$file['basename'];
+            }
         }
 
         $file = $this->getDir($srcImagePath, $size) . DIRECTORY_SEPARATOR . $file['basename'];
