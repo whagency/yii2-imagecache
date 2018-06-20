@@ -1,0 +1,30 @@
+{
+    "name": "whagency/yii2-imagecache",
+    "description": "Yii2 image cache",
+    "keywords": ["yii2", "image", "cache", "crop", "resize", "thumbnail"],
+    "type": "yii2-extension",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "support": {
+        "source": "https://github.com/whagency/yii2-imagecache",
+        "issues": "https://github.com/whagency/yii2-imagecache/issues"
+    },
+    "authors": [
+        {
+            "name": "Oleksii Titov",
+            "email": "dev@webheads.agency",
+            "homepage": "https://github.com/whagency",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-imagine": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "webheads\\imagecache\\": ""
+        }
+    }
+}
