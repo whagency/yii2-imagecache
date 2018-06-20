@@ -1,7 +1,7 @@
 {
     "name": "whagency/yii2-imagecache",
     "description": "Yii2 image cache",
-    "keywords": ["yii2", "image", "cache", "crop", "resize", "thumbnail"],
+    "keywords": ["yii2", "image", "cache", "crop", "resize", "thumbnail", "watermark"],
     "type": "yii2-extension",
     "license": "MIT",
     "minimum-stability": "stable",

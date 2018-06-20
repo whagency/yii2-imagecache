@@ -35,7 +35,12 @@ or add to your `composer.json` file
 
 
 ```json
-"whagency/yii2-imagecache": "*"
+...
+"require": {
+    ...
+    "whagency/yii2-imagecache": "*"
+},
+
 ```
 
 
