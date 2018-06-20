@@ -22,3 +22,36 @@ Capabilities
 
 Installation
 ------------
+
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+
+Either run
+
+```
+php composer.phar require "whagency/yii2-imagecache" "*"
+```
+
+or add to your `composer.json` file
+
+
+```json
+"whagency/yii2-imagecache": "*"
+```
+
+
+Config
+------
+
+~~~php
+
+'components' => [
+    ...
+    'imageCache' => [
+        'class' => 'letyii\imagecache\imageCache',
+        'cachePath' => '@app/web/files/cache',
+        'cacheUrl' => '@web/files/cache',
+    ],
+]
+
+~~~
+
