@@ -60,11 +60,11 @@ Usage Example
 
 ~~~php
 echo Yii::$app->imageCache->imgSrc('@app/web/files/image.jpg', '', ['fit' => 300, 'bw' => true, 'watermark' => '@app/web/files/watermark-image.png']);
-// Result: path to black-and-white image 300 x 300 without scaling and cropping, with watermark.
+// Result: path to black-and-white image 300 x 300 without cropping, with watermark.
 
 echo Yii::$app->imageCache->img('@app/web/files/image.jpg', '400x', ['class'=>'my-image', 'alt' => 'Image']);
-// Result: Scaled image with width = 400, alt and class.
+// Result: scaled image with width = 400, alt and class.
 
 echo Yii::$app->imageCache->img('@app/web/files/image.jpg', '100x150', ['alt' => 'Image'], ['bw' => true]);
-// Result: Resized and cropped black-and-white image 100 x 150 with alt.
+// Result: resized and cropped black-and-white image 100 x 150 with alt.
 ~~~
