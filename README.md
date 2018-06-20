@@ -31,7 +31,7 @@ Either run
 php composer.phar require "whagency/yii2-imagecache" "*"
 ```
 
-or add to your `composer.json` file
+or add to your composer.json file
 
 
 ```json
@@ -58,4 +58,7 @@ Config
 ]
 
 ~~~
+
+Usage Example
+-------------
 
