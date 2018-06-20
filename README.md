@@ -62,7 +62,7 @@ Usage Example
 echo Yii::$app->imageCache->imgSrc('@app/web/files/image.jpg', '', ['fit' => 300, 'bw' => true, 'watermark' => '@app/web/files/watermark-image.png']);
 // Result: path to black-and-white image 300 x 300 without cropping, with watermark.
 
-echo Yii::$app->imageCache->img('@app/web/files/image.jpg', '400x', ['class'=>'my-image', 'alt' => 'Image']);
+echo Yii::$app->imageCache->img('@app/web/files/image.jpg', '400x', ['class'=>'my-class', 'alt' => 'Image']);
 // Result: scaled image with width = 400, alt and class.
 
 echo Yii::$app->imageCache->img('@app/web/files/image.jpg', '100x150', ['alt' => 'Image'], ['bw' => true]);
