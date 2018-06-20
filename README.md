@@ -6,9 +6,9 @@
 
 Yii2 extension for generating images based on Imagick
 
-[![Latest Stable Version](https://poser.pugx.org/whagency/test/v/stable)](https://packagist.org/packages/whagency/test)
-[![Total Downloads](https://poser.pugx.org/whagency/test/downloads)](https://packagist.org/packages/whagency/test)
-[![License](https://poser.pugx.org/whagency/test/license)](https://packagist.org/packages/whagency/test)
+[![Latest Stable Version](https://poser.pugx.org/whagency/yii2-imagecache/v/stable)](https://packagist.org/packages/whagency/yii2-imagecache)
+[![Total Downloads](https://poser.pugx.org/whagency/yii2-imagecache/downloads)](https://packagist.org/packages/whagency/yii2-imagecache)
+[![License](https://poser.pugx.org/whagency/yii2-imagecache/license)](https://packagist.org/packages/whagency/yii2-imagecache)
 
 
 Capabilities
@@ -39,14 +39,12 @@ or add to your composer.json file
 "require": {
     "whagency/yii2-imagecache": "*"
 },
-
 ```
 
 Config
 ------
 
 ~~~php
-
 'components' => [
     ...
     'imageCache' => [
@@ -55,9 +53,18 @@ Config
         'cacheUrl' => '@web/files/cache',
     ],
 ]
-
 ~~~
 
 Usage Example
 -------------
 
+~~~php
+echo Yii::$app->imageCache->imgSrc('@app/web/files/image.jpg', '', ['fit' => 300, 'bw' => true, 'watermark' => '@app/web/files/watermark-image.png']);
+// Result: path to black-and-white image 300 x 300 without scaling and cropping, with watermark.
+
+echo Yii::$app->imageCache->img('@app/web/files/image.jpg', '400x', ['class'=>'my-image', 'alt' => 'Image']);
+// Result: Scaled image with width = 400, alt and class.
+
+echo Yii::$app->imageCache->img('@app/web/files/image.jpg', '100x150', ['alt' => 'Image'], ['bw' => true]);
+// Result: Resized and cropped black-and-white image 100 x 150 with alt.
+~~~
