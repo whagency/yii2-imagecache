@@ -21,6 +21,7 @@ class imageCache extends \yii\base\Component
             throw new \yii\base\InvalidConfigException('Please, set "cachePath" at $config["components"]["imageCache"]["cachePath"].');
         }
         
+        $this->cacheUrl = Yii::getAlias($this->cacheUrl);
         $this->cachePath = Yii::getAlias($this->cachePath);
     }
 
