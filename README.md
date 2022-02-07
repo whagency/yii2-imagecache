@@ -1,9 +1,3 @@
-<p align="center">
-    <a href="https://webheads.agency/" target="_blank">
-        <img src="https://webheads.agency/files/images/LogoWebHeads.png" width="181" alt="WebHeads - Creative Web Agency">
-    </a>
-</p>
-
 # yii2-imagecache
 
 Yii2 extension for generating images based on Imagick
@@ -18,8 +12,9 @@ Capabilities
 - [x] FIT - resize image WITH proportion and based on BOTH sides
 - [x] Scale - resize image WITH proportion and based on ONE sides
 - [x] Crop - crop image WITH proportion
-- [x] generate black-and-white image
-- [x] add watermark to the image
+- [x] Generate black-and-white image
+- [x] Add watermark to the image
+- [x] Add background color for FITed images
 
 Installation
 ------------
@@ -36,7 +31,6 @@ or add to your composer.json file
 
 
 ```json
-...
 "require": {
     "whagency/yii2-imagecache": "*"
 },
@@ -54,6 +48,14 @@ Config
         'cacheUrl' => '@web/files/cache',
     ],
 ]
+~~~
+
+Usage Example PHP 8.0
+-------------
+
+~~~php
+Yii::$app->imageCache->img('/files/image.jpg', imagick_options: ['fit' => 300, 'bg' => '#ff0000', 'watermark' => '@app/web/files/images/wmk.png'])
+// Result: image 300 x 300 without cropping, with watermark and background color.
 ~~~
 
 Usage Example

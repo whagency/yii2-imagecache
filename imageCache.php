@@ -12,30 +12,33 @@ class imageCache extends \yii\base\Component
     public $cachePath;
     public $cacheUrl;
     public $graphicsLibrary = 'Imagick';
-    
+
     public function init()
     {
         parent::init();
-        
+
         if (empty($this->cachePath)) {
             throw new \yii\base\InvalidConfigException('Please, set "cachePath" at $config["components"]["imageCache"]["cachePath"].');
         }
-        
+
         $this->cacheUrl = Yii::getAlias($this->cacheUrl);
         $this->cachePath = Yii::getAlias($this->cachePath);
     }
 
-    public function img($srcImagePath, $size = null, $options = [], $imagick_options = []) 
+    public function img($srcImagePath, $size = null, $options = [], $imagick_options = [])
     {
         return Html::img(self::imgSrc($srcImagePath, $size, $imagick_options), $options);
     }
-    
-    public function imgSrc($srcImagePath, $size = null, $imagick_options = []) 
+
+    public function imgSrc($srcImagePath, $size = null, $imagick_options = [])
     {
         $srcImagePath = Yii::getAlias($srcImagePath);
 
         if (!is_file($srcImagePath)) {
-            return null;
+            $srcImagePath = Yii::getAlias('@webroot').'/'.trim($srcImagePath, '/');
+            if (!is_file($srcImagePath)) {
+                return null;
+            }
         }
 
         if (is_file($this->getCachedFile($srcImagePath, $size, 'path', $imagick_options))) {
@@ -44,8 +47,8 @@ class imageCache extends \yii\base\Component
             return null;
         }
     }
-    
-    private function getCachedFile($srcImagePath, $size, $type = 'url', $imagick_options) 
+
+    private function getCachedFile($srcImagePath, $size, $type = 'url', $imagick_options = [])
     {
         $file = pathinfo($srcImagePath);
         if (!$file['basename']) {
@@ -69,7 +72,7 @@ class imageCache extends \yii\base\Component
         $cacheFilePath = $this->cachePath . DIRECTORY_SEPARATOR . $file;
         if (!is_file($cacheFilePath))
             $this->createCachedFile ($srcImagePath, $cacheFilePath, $size, $imagick_options);
-            
+
         if ($type == 'path') {
             return $cacheFilePath;
         } elseif ($type == 'url') {
@@ -78,8 +81,8 @@ class imageCache extends \yii\base\Component
             return null;
         }
     }
-    
-    private function getDir($srcImagePath, $size = null) 
+
+    private function getDir($srcImagePath, $size = null)
     {
         $md5FileName = md5($srcImagePath);
         $dir = substr($md5FileName, 0, 2) . DIRECTORY_SEPARATOR . substr($md5FileName, 2, 2) . DIRECTORY_SEPARATOR . substr($md5FileName, 4, 2);
@@ -89,7 +92,7 @@ class imageCache extends \yii\base\Component
         return $dir;
     }
 
-    private function createCachedFile($srcImagePath, $pathToSave, $size = null, $imagick_options)
+    private function createCachedFile($srcImagePath, $pathToSave, $size = null, $imagick_options = [])
     {
         BaseFileHelper::createDirectory(dirname($pathToSave), 0777, true);
         $size = $size ? $this->parseSize($size) : false;
@@ -99,12 +102,16 @@ class imageCache extends \yii\base\Component
         if (isset($imagick_options['bw']) && $imagick_options['bw'] === true) {
             $image->modulateImage(100, 0, 100);
         }
-        
+
         if (isset($imagick_options['fit']) && !empty($imagick_options['fit'])) {
             $sq = intval($imagick_options['fit']);
-            $bg = new \Imagick();
-            $bg->newImage($sq, $sq, new \ImagickPixel('white'));
-            //$bg->setImageFormat('jpg');
+
+            if (isset($imagick_options['bg'])) {
+                try {
+                    $image->setImageBackgroundColor($imagick_options['bg']);
+                } catch (\ImagickException $e) {}
+            }
+
             if ($image->getImageWidth() > $image->getImageHeight()) {
                 $image->thumbnailImage($sq, 0);
                 $nh = $image->getImageHeight();
@@ -141,13 +148,13 @@ class imageCache extends \yii\base\Component
                 $watermark->thumbnailImage($iWidth / 2, 0);
             } else {
                 $watermark->thumbnailImage(0, $iHeight / 2);
-            }   
+            }
             $wWidth = $watermark->getImageWidth();
             $wHeight = $watermark->getImageHeight();
 
             $x = ($iWidth - $wWidth) / 2;
             $y = ($iHeight - $wHeight) / 2;
-            
+
             $image->compositeImage($watermark, \imagick::COMPOSITE_OVER, $x, $y);
         }
 
